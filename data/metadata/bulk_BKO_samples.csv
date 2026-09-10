@@ -1,0 +1,8 @@
+sample_id,condition,group,gsm,note
+Astro_BKO_1,Bmal1_KO,knockout,GSM9610294,purified Bmal1-deficient astrocyte
+Astro_BKO_2,Bmal1_KO,knockout,GSM9610295,purified Bmal1-deficient astrocyte
+Astro_BKO_3,Bmal1_KO,knockout,GSM9610296,purified Bmal1-deficient astrocyte
+Astro_WT_1,WT,control,GSM9610297,purified wild-type astrocyte
+Astro_WT_2,WT,control,GSM9610298,purified wild-type astrocyte
+Astro_WT_3,WT,control,GSM9610299,purified wild-type astrocyte
+Astro_WT_4,WT,control,GSM9610300,purified wild-type astrocyte

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" style="margin:0;padding:0;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astrocyte × Aβ — Analysis Workflow (simplified)</title>
+<style>
+  :root{--ink:#1A1B1C;--muted:#5F6670;--line:#E4E3DD;--bg:#EEF0F2;
+        --blue:#4F6B9A;--bluet:#EDF2F8;--blueb:#cdd9e8;
+        --green:#35705A;--greent:#E9F2EE;--amber:#9A6A2F;--ambert:#F4EEE5;
+        --dark:#43495B;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);font-family:'Segoe UI',Arial,'Microsoft YaHei',sans-serif;color:var(--ink);}
+  .wrap{max-width:1120px;margin:0 auto;padding:30px 26px 42px;}
+  h1{font-size:21px;font-weight:700;margin:0 0 5px;}
+  .sub{font-size:13.5px;color:var(--muted);line-height:1.55;max-width:880px;}
+  .steplab{font-size:11.5px;font-weight:700;letter-spacing:1.4px;color:var(--muted);margin:20px 0 9px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 14px;}
+  .card .t{font-weight:700;font-size:13.5px;}
+  .card .s{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.5;}
+  .srcgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .src{border-left:4px solid var(--blue);}
+  .src.g{border-left-color:var(--green);} .src.a{border-left-color:var(--amber);}
+  .acc{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.3px;background:#f1f2f4;border-radius:4px;padding:1px 7px;margin-top:6px;color:#3a3f47;}
+  .flow{display:grid;grid-template-columns:1.7fr 1fr;gap:14px;align-items:start;}
+  .lane{border-radius:11px;padding:13px;}
+  .lane.sc{background:var(--bluet);border:1px solid var(--blueb);}
+  .lane.bk{background:#f6f6f4;border:1px solid var(--line);}
+  .laneh{font-weight:700;font-size:13.5px;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .tag{color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:700;}
+  .tag.b{background:var(--blue);} .tag.g{background:var(--green);} .tag.a{background:var(--amber);}
+  .arr{text-align:center;color:#9aa3b2;font-size:15px;line-height:1;margin:5px 0;}
+  /* cascade hero */
+  .cascade{border:1.6px solid var(--blue);border-radius:9px;background:#fff;padding:12px 12px 10px;}
+  .cascade .h{font-size:12px;font-weight:700;color:var(--blue);letter-spacing:.4px;margin-bottom:9px;}
+  .vgrid{display:grid;grid-template-columns:1fr 18px 1fr 18px 1fr;gap:2px;align-items:stretch;}
+  .v{border-radius:7px;padding:9px 9px;background:var(--bluet);border:1px solid var(--blueb);border-top:3px solid var(--blue);}
+  .v .vn{font-size:12.5px;font-weight:700;}
+  .v .vd{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.45;}
+  .varr{display:flex;align-items:center;justify-content:center;color:var(--blue);font-weight:700;font-size:14px;}
+  .cap{font-size:11px;color:var(--muted);font-style:italic;margin-top:8px;}
+  .minichips{display:flex;gap:7px;margin-top:9px;}
+  .mc{flex:1;text-align:center;background:var(--bluet);border:1px solid var(--blueb);border-radius:5px;padding:4px 0;font-size:11.5px;font-weight:700;color:var(--blue);}
+  .bkblk{border-radius:8px;padding:10px 12px;background:#fff;border:1px solid var(--line);}
+  .bkblk.g{border-left:4px solid var(--green);} .bkblk.a{border-left:4px solid var(--amber);}
+  .conv{background:var(--dark);border-radius:11px;padding:15px 17px;color:#eef0f5;}
+  .conv .ct{font-weight:700;font-size:14.5px;}
+  .conv .cr{font-size:12px;color:#cdd2de;margin-top:6px;line-height:1.6;}
+  .outgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:12px;}
+  .out{background:#525a70;border-radius:8px;padding:10px 12px;}
+  .out .of{font-size:12.5px;font-weight:700;} .out .od{font-size:11.5px;color:#d3d7e2;margin-top:3px;line-height:1.5;}
+  .foot{font-size:11.5px;color:#8a8f98;margin-top:12px;text-align:center;}
+  code{background:#e7eaef;padding:0 4px;border-radius:3px;font-size:11.5px;}
+  @media(max-width:900px){.srcgrid,.outgrid{grid-template-columns:1fr;}.flow{grid-template-columns:1fr;}.vgrid{grid-template-columns:1fr;}.varr{transform:rotate(90deg);padding:2px 0;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Astrocyte responses to Aβ pathology — analysis workflow</h1>
+  <div class="sub">One snRNA-seq dataset resolved into <b>three nested astrocyte versions</b>, two bulk RNA-seq experiments, all compared through one shared GSEA framework.</div>
+
+  <div class="steplab">① DATASETS</div>
+  <div class="srcgrid">
+    <div class="card src">
+      <div class="t">snRNA-seq · WT vs 5xFAD cortex</div>
+      <div class="s">Public data, saline arms only (APC arms excluded).<br>Samples: WT-saline vs 5xFAD-saline</div>
+      <span class="acc">GEO: GSE227157</span>
+    </div>
+    <div class="card src g">
+      <div class="t">Bulk · primary astrocytes ± Aβ42 (48 h)</div>
+      <div class="s">Direct Aβ effect, n=3 vs 3.<br>Samples: A_Beta_1–3 vs Astro_1–3 (untreated)</div>
+      <span class="acc">GEO: to be added (not yet deposited)</span>
+    </div>
+    <div class="card src a">
+      <div class="t">Bulk · Bmal1-KO vs WT astrocytes</div>
+      <div class="s">Re-analysis of prior project, n=3 vs 4.<br>Samples: Astro_BKO_1–3 vs Astro_WT_1–4</div>
+      <span class="acc">GEO: GSE325658</span>
+    </div>
+  </div>
+
+  <div class="arr">▼</div>
+
+  <div class="flow">
+    <!-- snRNA lane -->
+    <div class="lane sc">
+      <div class="laneh"><span class="tag b">snRNA-seq</span> WT vs 5xFAD — ambient-RNA correction is the core design</div>
+
+      <div class="card">
+        <div class="t">QC · integration · clustering · annotation</div>
+        <div class="s">Batch-aware CCA integration, unsupervised clustering and marker-based annotation into major cell types; astrocytes = clusters 1 / 7 / 8.</div>
+      </div>
+      <div class="arr">▼</div>
+
+      <div class="cascade">
+        <div class="h">★ THREE NESTED ASTROCYTE VERSIONS</div>
+        <div class="vgrid">
+          <div class="v"><div class="vn">V1 · Original</div><div class="vd">raw astrocytes, no correction</div></div>
+          <div class="varr">→</div>
+          <div class="v"><div class="vn">V2 · DecontX</div><div class="vd">celda::decontX ambient-RNA removal</div></div>
+          <div class="varr">→</div>
+          <div class="v"><div class="vn">V3 · DecontX-Micro</div><div class="vd">drop top 10% microglia-score nuclei</div></div>
+        </div>
+        <div class="cap">Same astrocyte clusters throughout; microglial signal removed step by step.</div>
+      </div>
+      <div class="arr">▼</div>
+
+      <div class="card">
+        <div class="t">DE (FAD vs WT) + GSEA (GO-BP) — identical engine ×3</div>
+        <div class="s">Seurat FindMarkers → ranked list → clusterProfiler gseGO; padj&lt;0.05 &amp; |NES|≥1.5.</div>
+        <div class="minichips"><span class="mc">V1 · 353</span><span class="mc">V2 · 156</span><span class="mc">V3 · 87</span></div>
+      </div>
+      <div class="arr">▼</div>
+
+      <div class="card">
+        <div class="t">10 functional groups · leading-edge genes</div>
+        <div class="s">Keyword grouping with manual curation; align the three versions by GO ID and NES direction.</div>
+      </div>
+    </div>
+
+    <!-- bulk lane -->
+    <div class="lane bk">
+      <div class="laneh"><span class="tag g" style="background:#6b7180;">Bulk ×2</span> same GSEA framework</div>
+
+      <div class="bkblk g">
+        <div class="t" style="font-size:13px;">Aβ42 vs vehicle</div>
+        <div class="s">DESeq2 DE → gseGO
+          <div class="minichips"><span class="mc" style="background:var(--greent);border-color:#c4dbd0;color:var(--green);">911 GO-BP terms</span></div>
+        </div>
+      </div>
+
+      <div class="arr" style="margin:9px 0;">▼</div>
+
+      <div class="bkblk a">
+        <div class="t" style="font-size:13px;">BKO vs WT <span style="font-weight:400;color:var(--muted);font-size:11.5px;">(prior study)</span></div>
+        <div class="s">DESeq2 DE → gseGO
+          <div class="minichips"><span class="mc" style="background:var(--ambert);border-color:#e2d3bd;color:var(--amber);">308 GO-BP terms</span></div>
+        </div>
+      </div>
+
+      <div style="font-size:11.5px;color:var(--muted);margin-top:12px;line-height:1.55;">
+        Bulk ranked by DESeq2 Wald statistic; snRNA ranked by avg_log2FC — both feed the same GO-BP / grouping rules.
+      </div>
+    </div>
+  </div>
+
+  <div class="arr">▼</div>
+
+  <!-- convergence -->
+  <div class="conv">
+    <div class="ct">② Cross-dataset comparison</div>
+    <div class="cr">Match terms by <b>GO ID</b> · compare <b>NES direction</b> · shared leading-edge genes = overlap of each term's <code style="background:#5a6278;color:#eef;">core_enrichment</code> · gene log2FC computed per dataset and used for <b>direction only</b> (no cross-platform effect-size comparison).</div>
+    <div class="outgrid">
+      <div class="out"><div class="of">Across the three snRNA versions</div><div class="od">Quantify how immune enrichment shrinks with progressive correction (111→26→4), and identify conserved metabolic / transport / cytoskeletal programs shared by all three</div></div>
+      <div class="out"><div class="of">Aβ42 bulk × snRNA</div><div class="od">Test which 5xFAD astrocyte changes direct Aβ reproduces — selective antigen/MHC activation and reduced sterol biosynthesis</div></div>
+      <div class="out"><div class="of">BKO × Aβ42 × V3</div><div class="od">Separate BMAL1-associated responses (antigen processing) from largely BMAL1-independent ones (sterol suppression) and 5xFAD-brain-only programs</div></div>
+    </div>
+  </div>
+
+  <div class="foot">Wet-lab immunohistochemistry (GFAP / CD11b / Aβ40, plaque-distance and plaque-size analysis) sits outside this computational pipeline.</div>
+
+</div>
+</body>
+</html>

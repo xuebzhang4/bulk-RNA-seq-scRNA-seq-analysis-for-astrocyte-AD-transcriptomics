@@ -1,0 +1,5 @@
+sample_id,condition,treatment,gsm,used_in_study,note
+WT-saline,WT,saline,GSM7092584,yes,young wild-type daily saline
+5xFAD-saline,5xFAD,saline,GSM7092586,yes,5xFAD daily saline
+WT-APC,WT,APC,GSM7092585,no,excluded - exogenous APC arm
+5xFAD-APC,5xFAD,APC,GSM7092587,no,excluded - exogenous APC arm

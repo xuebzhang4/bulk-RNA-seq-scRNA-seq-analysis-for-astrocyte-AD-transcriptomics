@@ -1,0 +1,7 @@
+sample_id,condition,group,treatment_hours,gsm,note
+A_Beta_1,AB42,treatment,48,to_be_added,purified primary astrocyte, A-beta 42 48 h
+A_Beta_2,AB42,treatment,48,to_be_added,purified primary astrocyte, A-beta 42 48 h
+A_Beta_3,AB42,treatment,48,to_be_added,purified primary astrocyte, A-beta 42 48 h
+Astro_1,untreated,control,48,to_be_added,untreated primary astrocyte
+Astro_2,untreated,control,48,to_be_added,untreated primary astrocyte
+Astro_3,untreated,control,48,to_be_added,untreated primary astrocyte
