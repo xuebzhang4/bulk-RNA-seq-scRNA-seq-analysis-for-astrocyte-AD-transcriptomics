@@ -16,14 +16,6 @@ what make the comparison valid.
    effect sizes across platforms.
 5. Combined leading-edge heatmaps use a fixed colour cap of **±1.5** for visual parity.
 
-| Script | What it does | Detail level |
-|---|---|---|
-| `00_shared_comparison_utils.R` | Reusable functions for rules 1–5: GO-ID join, NES-direction table, `core_enrichment` split/intersect, per-dataset log2FC bind, ±1.5-capped heatmap matrix. | **Full** — single source of truth for the rules. |
-| `01_unified_GO_tally.R` | Tally significant GO-BP terms and functional groups for all four datasets under the same threshold; the overview counts (353/156/87; 911; 308). | Medium. |
-| `02_AB42_vs_snRNA.R` | Direct-Aβ comparison: antigen-processing/MHC activation and reduced sterol/steroid biosynthesis — cross NES table and shared leading-edge genes for these modules. | **Full.** |
-| `03_BKO_vs_AB42_vs_V3.R` | Three-way separation: Aβ42 ∩ BKO overlap (101 terms); BKO ∩ V3 but **not** Aβ42 (18 terms — 12 same-direction microtubule/cilium programs, 83 shared leading-edge genes / 62 reproduced; 6 opposite-direction). | **Full.** |
-| `04_leading_edge_LFC_heatmap.R` | Generic leading-edge-gene × dataset log2FC heatmap built through `00` (direction only, capped ±1.5). | Medium/template. |
-
 ## Inputs / outputs
 
 - **Input:** the DE + GSEA result tables produced by `01_snRNAseq/` and
