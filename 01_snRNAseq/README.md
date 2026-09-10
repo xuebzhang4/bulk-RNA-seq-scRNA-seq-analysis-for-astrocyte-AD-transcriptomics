@@ -1,12 +1,8 @@
 # 01_snRNAseq — single-nucleus RNA-seq main line
 
-This is the **most detailed** part of the repository: the ambient-RNA correction
-strategy and the three nested astrocyte versions are the methodological core of the
+This is the ambient-RNA correction strategy and the three nested astrocyte versions are the methodological core of the
 paper, so scripts `02`–`05` are complete, runnable and heavily commented. Standard
 QC/integration (`01`) is kept concise on purpose.
-
-Run order matches the numbering. All scripts read paths from `00_packages_and_config.R`
-(relative paths — no hard-coded `D:\...` drives).
 
 ## Inputs / outputs
 
