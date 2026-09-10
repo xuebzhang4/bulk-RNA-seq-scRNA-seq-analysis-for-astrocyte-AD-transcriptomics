@@ -130,16 +130,3 @@ source("02_bulkRNAseq/00_config.R")        # then 01 -> 04
 # Cross-dataset comparison
 source("03_cross_dataset/00_shared_utils.R")  # then 01 -> 04
 ```
-
-## Citation
-
-A Zenodo archive DOI and the article citation will be added to
-[`CITATION.cff`](CITATION.cff) upon publication.
-
-**Authors:** Xuebing Zhang, Xingqi Meng, Jin Young Kim — Department of Biomedical
-Sciences, City University of Hong Kong.
-
-## License
-
-Code is released under the [MIT License](LICENSE). Data remain under their original GEO
-terms.
