@@ -17,12 +17,6 @@ microglial-signal nuclei removed — and then place every dataset under **one sh
 / functional-group framework** so that terms and leading-edge genes can be matched by GO
 ID and compared by direction.
 
-**Analysis workflow:** [`docs/workflow/analysis_workflow_flowchart.html`](docs/workflow/analysis_workflow_flowchart.html)
-(also available as an editable PowerPoint:
-[`docs/workflow/analysis_workflow_flowchart.pptx`](docs/workflow/analysis_workflow_flowchart.pptx)).
-
----
-
 ## Datasets
 
 | | Modality / system | Contrast | Source |
