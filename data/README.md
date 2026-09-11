@@ -10,7 +10,7 @@ frozen archive from Zenodo (DOI to be added).
 | Label | Modality | Contrast | Samples | Source |
 |---|---|---|---|---|
 | snRNA | single-nucleus RNA-seq, mouse cortex | WT vs 5xFAD (saline arms only) | WT-saline `GSM7092584`; 5xFAD-saline `GSM7092586` | **GEO GSE227157** (Fatmi *et al.*, *Aging* 2024;16:3137–3159, PMID 38385967). The two APC arms (`GSM7092585`, `GSM7092587`) are excluded. |
-| bulk Aβ42 | bulk RNA-seq, purified primary astrocytes | Aβ42 48 h vs untreated | `A_Beta_1–3` vs `Astro_1–3` (n=3 vs 3) | In-house. **GEO accession: to be added (not yet deposited).** |
+| bulk Aβ42 | bulk RNA-seq, purified primary astrocytes | Aβ42 48 h vs untreated | `A_Beta_1–3` vs `Astro_1–3` (n=3 vs 3) | **GEO GSE346806** (in-house). |
 | bulk BKO | bulk RNA-seq, purified astrocytes | Bmal1-KO vs WT | `Astro_BKO_1–3` (`GSM9610294–296`) vs `Astro_WT_1–4` (`GSM9610297–300`), n=3 vs 4 | **GEO GSE325658** (in-house prior project). |
 
 Sample sheets with the exact group labels used by the scripts are in `metadata/`:
