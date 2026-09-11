@@ -28,11 +28,12 @@ ID and compared by direction.
 | | Modality / system | Contrast | Source |
 |---|---|---|---|
 | **snRNA** | single-nucleus, mouse cortex | WT vs 5xFAD, saline arms only | GEO [**GSE227157**](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE227157) (Fatmi *et al.*, *Aging* 2024;16:3137–3159, PMID 38385967) |
-| **bulk Aβ42** | bulk, purified primary astrocytes | Aβ42 48 h vs untreated, n=3 vs 3 | in-house — *GEO accession to be added* |
+| **bulk Aβ42** | bulk, purified primary astrocytes | Aβ42 48 h vs untreated, n=3 vs 3 | GEO [**GSE346806**](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE346806) (in-house) |
 | **bulk BKO** | bulk, purified astrocytes | *Bmal1*-KO vs WT, n=3 vs 4 | GEO [**GSE325658**](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE325658) (prior in-house project) |
 
 Exact sample lists are in [`data/metadata/`](data/metadata). Large raw/count files are
 **not** tracked here — see [`data/README.md`](data/README.md) for download instructions.
+
 
 ## Repository structure
 
